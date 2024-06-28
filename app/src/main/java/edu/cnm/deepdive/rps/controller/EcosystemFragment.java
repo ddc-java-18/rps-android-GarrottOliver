@@ -144,11 +144,19 @@ public class EcosystemFragment extends Fragment implements MenuProvider {
           binding.terrain.invalidate();
         });
 
+    viewModel
+        .getIterationCount()
+        .observe(owner, (iterations) -> binding.iterationCount.setText(getString(R.string.iteration_count_format, iterations)));
+
     // TODO Using the same viewModel as is used in the operations above, get a reference to the
     //  LiveData<Long> containing the iteration count of the ecosystem simulation (see the
     //  getIterationCount() method in EcosystemViewModel); observe that LiveData, and pass the value
     //  received by the observer to the corresponding text widgets in the fragment_ecosystem layout,
     //  to display the iteration count.
+
+    viewModel
+        .getCurrentBreedCount()
+        .observe(owner, (numBreeds) -> binding.breedCount.setText(String.valueOf(numBreeds)));
 
     // TODO Using the same viewModel as is used in the operations above, get a reference to the
     //  LiveData<Integer> containing the number of extant (surviving) breeds in the ecosystem
